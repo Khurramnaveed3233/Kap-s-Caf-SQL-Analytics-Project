@@ -112,7 +112,7 @@ Below are **sample queries** (full set available in [`KAPS.sql`](./KAPS.sql)).
       FROM MonthlySales
       ORDER BY Month;
 
-**Conclusion**
+## Conclusion
 
 This project demonstrates the ability to:
 
