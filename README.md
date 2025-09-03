@@ -94,9 +94,9 @@ These fields represent the café’s **core business levers**: *how many items w
 
 ## Key Insights (Summary)  
 
-1. **Revenue Trends ** → Fluctuations across months; some stability despite lower orders, pointing to higher spend per order.  
-2. **Order Patterns ** → Order volumes inconsistent; revenue not always aligned, showing changing customer behavior.  
-3. **Quantity Dynamics ** → Volatile demand; spikes tied to promotions/seasonality, drops linked to premium-pricing effects.  
+1. **Revenue Trends** → Fluctuations across months; some stability despite lower orders, pointing to higher spend per order.  
+2. **Order Patterns** → Order volumes inconsistent; revenue not always aligned, showing changing customer behavior.  
+3. **Quantity Dynamics** → Volatile demand; spikes tied to promotions/seasonality, drops linked to premium-pricing effects.  
 
 ---
 
