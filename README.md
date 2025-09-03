@@ -102,10 +102,10 @@ These fields represent the café’s **core business levers**: *how many items w
 
 ##  Recommendations  
 
-1. **Promotions in Weak Months ** → Boost revenue where demand is historically low.  
-2. **Inventory Optimization ** → Match stock levels to seasonal demand patterns.  
-3. **Loyalty Programs ** → Retain repeat customers and stabilize order volumes.  
-4. **Pricing Strategy ** → Leverage premium-pricing opportunities when revenue rises despite fewer orders.  
+1. **Promotions in Weak Months** → Boost revenue where demand is historically low.  
+2. **Inventory Optimization** → Match stock levels to seasonal demand patterns.  
+3. **Loyalty Programs** → Retain repeat customers and stabilize order volumes.  
+4. **Pricing Strategy** → Leverage premium-pricing opportunities when revenue rises despite fewer orders.  
 
 ---
 
