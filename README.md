@@ -1,4 +1,4 @@
-# Kap-s-Cafe - SQL-Analytics-Project
+# Kap's-Cafe - SQL-Analytics-Project
 
 ![CoverImage](https://github.com/user-attachments/assets/672c199f-aaaf-4ea7-8c77-df550529f424)
 
