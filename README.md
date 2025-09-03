@@ -1,124 +1,121 @@
-# Kap's-Cafe - SQL-Analytics-Project
+
+# ☕ Kap’s Café – SQL Analytics Project  
 
 ![CoverImage](https://github.com/user-attachments/assets/672c199f-aaaf-4ea7-8c77-df550529f424)
 
-##  Objective
+##  Objective  
 
-The objective of this project is to analyze **sales, orders, and product quantities** at Kap's Café using SQL Server.  
-By applying SQL queries, we aim to uncover **monthly trends, growth patterns, and customer demand behavior**, ultimately enabling data-driven decisions to increase revenue and optimize operations.
+The goal of this project is to analyze **sales, orders, and product quantities** at Kap’s Café using SQL Server.  
+Through monthly aggregation, window functions, and comparative analysis, the project uncovers **trends, demand shifts, and performance drivers**, providing management with actionable insights for growth.  
 
 ---
 
-##  Problem Statement
+##  Problem Statement  
+Kap’s Café management struggled with making **data-driven decisions**. Their data existed but was not actively analyzed, leading to blind spots in:  
+- Monthly revenue tracking  
+- Order volume trends  
+- Product demand shifts  
+- Operational efficiency  
 
-Kap's Café management wanted to answer key business questions, including:  
-
+They posed five core business questions:  
 1. How much sales revenue is generated each month?  
-2. Are sales increasing or decreasing month-over-month?  
+2. Are sales increasing or decreasing month-over-month (MoM)?  
 3. What is the difference in sales and orders compared to the previous month?  
 4. How many unique customer orders are received each month?  
 5. How much product quantity is sold, and how does it change monthly?  
 
-Currently, management lacked a structured analysis of their transactional database, making it difficult to track performance and identify areas for growth.
+Without SQL-based analysis, these questions could not be reliably answered.  
 
 ---
 
-##  Data Description
+##  Data Description  
 
-- **Table Name:** `KAPS`  
-- **Columns Used:**  
-  - `transaction_id` → Unique identifier for each order  
-  - `transaction_date` → Date of transaction  
-  - `unit_price` → Price of a single unit  
-  - `transaction_qty` → Quantity sold in the transaction  
+**Source Table:** `KAPS`  
 
-- **Derived Metrics:**  
-  - **Revenue** = `unit_price * transaction_qty`  
-  - **Monthly Sales, Orders, and Quantities** aggregated using SQL  
+Each row represents a transaction line at Kap’s Café.  
 
----
+**Columns Used:**  
+- `transaction_id` → Unique identifier per transaction  
+- `transaction_date` → Date of transaction (basis for monthly aggregation)  
+- `unit_price` → Price of each item sold  
+- `transaction_qty` → Quantity of items sold  
 
-## Approach
-- Wrote **10 SQL queries** in SQL Server to answer business questions.  
-- Used **aggregation, CTEs, and window functions (LAG)** for insights.  
-- Grouped data by **month (yyyy-MM)** for time-series analysis.  
-- Compared **Month-over-Month (MoM)** changes in sales, orders, and quantities.  
-- Derived **absolute differences** to highlight the magnitude of change.  
+**Derived Metric:**  
+
+- **Revenue (₹)** = `unit_price * transaction_qty`  
+
+These fields represent the café’s **core business levers**: *how many items were sold, at what price, when, and in how many distinct orders.*  
 
 ---
 
-## Key Insights
+##  Approach / Methodology  
 
-### 1. Monthly Revenue Trends (Q1–Q3)  
-- Revenue fluctuated across months, with certain months showing strong growth while others declined.  
-- **MoM revenue changes** revealed seasonal patterns.  
-- The **absolute sales difference** highlighted high-variance months where business performance shifted significantly.  
-
-### 2. Customer Orders (Q4–Q6)  
-
-- Total number of unique orders varied each month.  
-- **MoM order growth** aligned with revenue trends, confirming that higher orders generally drove higher sales.  
-- Some months showed **declining orders but stable revenue**, suggesting higher average spend per order.  
-
-### 3. Product Quantities Sold (Q7–Q10)  
-
-- Quantity sold per month showed peaks, possibly linked to promotions or seasonal demand.  
-- **MoM change in quantities** revealed demand spikes.  
-- **Absolute differences** flagged months with sharp increases/decreases, useful for inventory planning.  
+1. **Data Extraction** → Pulled sales data from the `KAPS` table.  
+2. **Monthly Aggregation** → Grouped transactions into monthly buckets.  
+3. **Window Functions (LAG)** → Calculated MoM growth/decline in sales, orders, and quantities.  
+4. **Absolute Differences** → Measured volatility and stability in performance.  
+5. **Business Interpretation** → Translated SQL outputs into actionable recommendations.  
 
 ---
 
-##  Recommendations
+##  Business Questions & Insights  
 
-1. **Boost Revenue in Low-Performing Months**  
-   - Launch targeted promotions or discounts in historically weak months.  
+### Q1. What is the total sales value (₹) for each month?  
+**Insight:** Sales revenue showed **peaks and troughs**; weak months highlighted opportunities for targeted promotions.  
 
-2. **Inventory & Supply Chain Optimization**  
-   - Use monthly quantity sold trends to predict demand and avoid over/under stocking.  
+### Q2. What is the MoM increase or decrease in total sales?  
+**Insight:** Revealed both **steady growth** months and sharp declines, pinpointing **risk and opportunity periods**.  
 
-3. **Customer Retention Programs**  
-   - Since orders vary, introducing **loyalty programs** may stabilize demand.  
+### Q3. What is the absolute difference in sales vs. previous month?  
+**Insight:** Exposed **volatility** in café performance; anomalous months likely linked to seasonality or external factors.  
 
-4. **Pricing Strategy**  
-   - In months where orders dropped but sales remained high, study **premium product performance** and replicate strategies.  
+### Q4. What is the total number of orders per month?  
+**Insight:** Reflected **customer engagement**. Higher orders aligned with busy café periods; dips signaled weak demand.  
+
+### Q5. What is the MoM change in number of orders?  
+**Insight:** Declining orders during steady revenue months suggested **premium-pricing effects**.  
+
+### Q6. What is the absolute difference in orders vs. previous month?  
+**Insight:** Quantified **scale of customer activity shifts**, flagging months of sharp drop-offs.  
+
+### Q7. Total Quantity Sold Analysis (with MoM & absolute differences)  
+**Insight:** Variability in demand intensity; sometimes **fewer items but higher sales** → premium product influence.  
+
+### Q8. What is the total quantity sold per month?  
+**Insight:** Unit counts revealed **product movement**, with peaks indicating high-demand seasons.  
+
+### Q9. What is the MoM change in quantity sold?  
+**Insight:** Detected demand spikes/drops tied to **promotions or seasonal boosts**.  
+
+### Q10. What is the absolute difference in quantity sold vs. previous month?  
+**Insight:** Showed **demand volatility**; large swings imply inventory challenges, while stable months signal consistency.  
 
 ---
 
-##  SQL Implementation
+## Key Insights (Summary)  
 
-Below are **sample queries** (full set available in [`KAPS.sql`](./KAPS.sql)).
+1. **Revenue Trends 📈** → Fluctuations across months; some stability despite lower orders, pointing to higher spend per order.  
+2. **Order Patterns 🛒** → Order volumes inconsistent; revenue not always aligned, showing changing customer behavior.  
+3. **Quantity Dynamics 📦** → Volatile demand; spikes tied to promotions/seasonality, drops linked to premium-pricing effects.  
 
-### Q1: Monthly Total Sales
+---
 
-       SELECT 
-       FORMAT(transaction_date, 'yyyy-MM') AS Month,
-       ROUND(SUM(unit_price * transaction_qty), 2) AS Total_Sales
-       FROM KAPS
-       GROUP BY FORMAT(transaction_date, 'yyyy-MM')
-       ORDER BY MIN(transaction_date);
+##  Recommendations  
 
-### Q2: Month-over-Month Change in Sales
+1. **Promotions in Weak Months 🎯** → Boost revenue where demand is historically low.  
+2. **Inventory Optimization 📦** → Match stock levels to seasonal demand patterns.  
+3. **Loyalty Programs 🤝** → Retain repeat customers and stabilize order volumes.  
+4. **Pricing Strategy 💲** → Leverage premium-pricing opportunities when revenue rises despite fewer orders.  
 
-      WITH MonthlySales AS (
-      SELECT 
-        FORMAT(transaction_date, 'yyyy-MM') AS Month,
-        SUM(unit_price * transaction_qty) AS Total_Sales
-      FROM KAPS
-      GROUP BY FORMAT(transaction_date, 'yyyy-MM')
-      )
-      SELECT 
-      Month,
-      Total_Sales,  (Total_Sales - LAG(Total_Sales) OVER (ORDER BY Month)) AS MoM_Change
-      FROM MonthlySales
-      ORDER BY Month;
+---
 
-## Conclusion
+## Conclusion  
 
-This project demonstrates the ability to:
+- **SQL → Insights**: SQL transformed raw data into measurable intelligence.  
+- **Visibility Achieved**: Kap’s Café gained clarity on sales, demand, and customer behavior.  
+- **From Data to Impact**: Clear trends and recommendations create a roadmap for sustainable growth.  
 
-- Analyze real-world transactional data in SQL Server
-- Apply advanced SQL techniques (CTEs, window functions)
-- Translate raw data into business insights and recommendations
+---
 
-By integrating SQL skills with business understanding, this project showcases end-to-end data analytics capabilities valuable for stakeholders and portfolio presentations.
+## 📁 Project Structure  
 
