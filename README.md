@@ -94,18 +94,18 @@ These fields represent the café’s **core business levers**: *how many items w
 
 ## Key Insights (Summary)  
 
-1. **Revenue Trends 📈** → Fluctuations across months; some stability despite lower orders, pointing to higher spend per order.  
-2. **Order Patterns 🛒** → Order volumes inconsistent; revenue not always aligned, showing changing customer behavior.  
-3. **Quantity Dynamics 📦** → Volatile demand; spikes tied to promotions/seasonality, drops linked to premium-pricing effects.  
+1. **Revenue Trends ** → Fluctuations across months; some stability despite lower orders, pointing to higher spend per order.  
+2. **Order Patterns ** → Order volumes inconsistent; revenue not always aligned, showing changing customer behavior.  
+3. **Quantity Dynamics ** → Volatile demand; spikes tied to promotions/seasonality, drops linked to premium-pricing effects.  
 
 ---
 
 ##  Recommendations  
 
-1. **Promotions in Weak Months 🎯** → Boost revenue where demand is historically low.  
-2. **Inventory Optimization 📦** → Match stock levels to seasonal demand patterns.  
-3. **Loyalty Programs 🤝** → Retain repeat customers and stabilize order volumes.  
-4. **Pricing Strategy 💲** → Leverage premium-pricing opportunities when revenue rises despite fewer orders.  
+1. **Promotions in Weak Months ** → Boost revenue where demand is historically low.  
+2. **Inventory Optimization ** → Match stock levels to seasonal demand patterns.  
+3. **Loyalty Programs ** → Retain repeat customers and stabilize order volumes.  
+4. **Pricing Strategy ** → Leverage premium-pricing opportunities when revenue rises despite fewer orders.  
 
 ---
 
@@ -117,5 +117,5 @@ These fields represent the café’s **core business levers**: *how many items w
 
 ---
 
-## 📁 Project Structure  
+
 
