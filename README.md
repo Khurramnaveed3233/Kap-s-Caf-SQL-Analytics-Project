@@ -97,7 +97,7 @@ Kap's Café management was making decisions **without data**. Their transaction 
 ---
 
 
-## 🔍 Key Findings
+##  Key Findings
 
 ### Revenue Trends
 - Sales revenue shows clear **peaks and troughs** across months
@@ -116,7 +116,7 @@ Kap's Café management was making decisions **without data**. Their transaction 
 
 ---
 
-## 💡 Business Recommendations
+##  Business Recommendations
 
 | Area | Recommendation |
 |---|---|
@@ -161,19 +161,12 @@ GROUP BY FORMAT(transaction_date, 'yyyy-MM');
 
 ##  Repository Structure
 ```
-📂 Kap-s-Caf-SQL-Analytics-Project
+Kap-s-Caf-SQL-Analytics-Project
 ├── 📄 KapsCafe_Analysis.sql           — Full SQL scripts and queries
 ├── 🖼️  CoverImage.jpg                  — Project cover image
 ├── 🖼️  Query Screenshots (1-10).png    — SQL query result screenshots
 └── 📄 README.md                       — Project documentation
 ```
-
----
-
-##  Project Preview
-
-![Kap's Cafe SQL Analytics](Kap's%20Café%20–%20SQL%20Analytics%20Project.jpg)
-
 ---
 
 ##  About
