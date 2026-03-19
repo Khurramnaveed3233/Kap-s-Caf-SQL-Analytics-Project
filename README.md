@@ -1,62 +1,36 @@
 
-# ☕ Kap’s Café – SQL Analytics Project  
+#  Kap’s Café – SQL Analytics Project  
 
 ![CoverImage](https://github.com/user-attachments/assets/672c199f-aaaf-4ea7-8c77-df550529f424)
 
 ##  Objective  
 
-The goal of this project is to analyze **sales, orders, and product quantities** at Kap’s Café using SQL Server.  
-Through monthly aggregation, window functions, and comparative analysis, the project uncovers **trends, demand shifts, and performance drivers**, providing management with actionable insights for growth.  
+Analyzed sales, orders, and product quantities at **Kap's Café** using SQL Server to uncover monthly revenue trends, demand shifts, and performance drivers. Through advanced SQL techniques including **LAG Window Functions, monthly aggregations, and MoM comparative analysis**, the project transforms raw transaction data into clear, actionable business intelligence for café management.
+
 
 ---
 
-##  Problem Statement  
-Kap’s Café management struggled with making **data-driven decisions**. Their data existed but was not actively analyzed, leading to blind spots in:  
-- Monthly revenue tracking  
-- Order volume trends  
-- Product demand shifts  
-- Operational efficiency  
+##  Business Problem
 
-They posed five core business questions:  
-1. How much sales revenue is generated each month?  
-2. Are sales increasing or decreasing month-over-month (MoM)?  
-3. What is the difference in sales and orders compared to the previous month?  
-4. How many unique customer orders are received each month?  
-5. How much product quantity is sold, and how does it change monthly?  
+Kap's Café management was making decisions **without data**. Their transaction data existed but was never analyzed — creating critical blind spots in:
 
-Without SQL-based analysis, these questions could not be reliably answered.  
+- **Monthly revenue tracking** — no visibility into how much was earned each month
+- **Order volume trends** — no way to detect declining or growing customer activity
+- **Product demand shifts** — no insight into what was selling and when
+- **Operational efficiency** — no data to guide staffing, inventory, or promotions
 
 ---
 
-##  Data Description  
+##  Dataset
 
-**Source Table:** `KAPS`  
+| Field | Description |
+|---|---|
+| `transaction_id` | Unique identifier per transaction |
+| `transaction_date` | Date of transaction — basis for monthly aggregation |
+| `unit_price` | Price of each item sold |
+| `transaction_qty` | Quantity of items sold per transaction |
+| `Revenue` | Derived metric — `unit_price × transaction_qty` |
 
-Each row represents a transaction line at Kap’s Café.  
-
-**Columns Used:**  
-- `transaction_id` → Unique identifier per transaction  
-- `transaction_date` → Date of transaction (basis for monthly aggregation)  
-- `unit_price` → Price of each item sold  
-- `transaction_qty` → Quantity of items sold  
-
-**Derived Metric:**  
-
-- **Revenue (₹)** = `unit_price * transaction_qty`  
-
-These fields represent the café’s **core business levers**: *how many items were sold, at what price, when, and in how many distinct orders.*  
-
----
-
-##  Approach / Methodology  
-
-1. **Data Extraction** → Pulled sales data from the `KAPS` table.  
-2. **Monthly Aggregation** → Grouped transactions into monthly buckets.  
-3. **Window Functions (LAG)** → Calculated MoM growth/decline in sales, orders, and quantities.  
-4. **Absolute Differences** → Measured volatility and stability in performance.  
-5. **Business Interpretation** → Translated SQL outputs into actionable recommendations.  
-
----
 
 ##  Business Questions & Insights  
 
@@ -122,30 +96,94 @@ These fields represent the café’s **core business levers**: *how many items w
 
 ---
 
-## Key Insights (Summary)  
 
-1. **Revenue Trends** → Fluctuations across months; some stability despite lower orders, pointing to higher spend per order.  
-2. **Order Patterns** → Order volumes inconsistent; revenue not always aligned, showing changing customer behavior.  
-3. **Quantity Dynamics** → Volatile demand; spikes tied to promotions/seasonality, drops linked to premium-pricing effects.  
+## 🔍 Key Findings
 
----
+### Revenue Trends
+- Sales revenue shows clear **peaks and troughs** across months
+- Some months maintain stable revenue despite **lower order volumes** — indicating a **premium pricing effect** where customers spend more per visit
+- Weak months present clear opportunities for **targeted promotional campaigns**
 
-##  Recommendations  
+### Order Patterns
+- Order volumes are **inconsistent** and do not always align with revenue trends
+- Months with declining orders but steady revenue confirm customers are placing **higher-value orders**
+- Sharp order drop-offs in certain months signal **seasonal demand weakness**
 
-1. **Promotions in Weak Months** → Boost revenue where demand is historically low.  
-2. **Inventory Optimization** → Match stock levels to seasonal demand patterns.  
-3. **Loyalty Programs** → Retain repeat customers and stabilize order volumes.  
-4. **Pricing Strategy** → Leverage premium-pricing opportunities when revenue rises despite fewer orders.  
-
----
-
-## Conclusion  
-
-- **SQL → Insights**: SQL transformed raw data into measurable intelligence.  
-- **Visibility Achieved**: Kap’s Café gained clarity on sales, demand, and customer behavior.  
-- **From Data to Impact**: Clear trends and recommendations create a roadmap for sustainable growth.  
+### Quantity Dynamics
+- Demand is **volatile** — large MoM swings indicate inventory planning challenges
+- Quantity spikes are tied to **seasonal demand or promotions**
+- Stable quantity months signal **predictable, consistent customer behavior**
 
 ---
 
+## 💡 Business Recommendations
 
+| Area | Recommendation |
+|---|---|
+| Weak Month Revenue | Launch targeted promotions and bundle offers during historically low months |
+| Inventory Planning | Align stock levels with seasonal demand patterns to reduce waste |
+| Customer Retention | Introduce a loyalty program to stabilize repeat order volumes |
+| Pricing Strategy | Leverage premium-pricing opportunities — revenue can grow even with fewer orders |
+| Demand Forecasting | Use MoM trend data to anticipate slow periods and plan ahead |
 
+---
+
+## 🛠️ Technical Approach
+
+### SQL Server Techniques Used
+```sql
+-- Example: MoM Sales Growth using LAG Window Function
+SELECT
+    FORMAT(transaction_date, 'yyyy-MM') AS Month,
+    SUM(unit_price * transaction_qty) AS Total_Revenue,
+    LAG(SUM(unit_price * transaction_qty)) OVER (ORDER BY FORMAT(transaction_date, 'yyyy-MM')) AS Prev_Month_Revenue,
+    SUM(unit_price * transaction_qty) - LAG(SUM(unit_price * transaction_qty)) OVER (ORDER BY FORMAT(transaction_date, 'yyyy-MM')) AS MoM_Difference
+FROM KAPS
+GROUP BY FORMAT(transaction_date, 'yyyy-MM');
+```
+
+| Technique | Purpose |
+|---|---|
+| `SUM()` + `GROUP BY` | Monthly revenue, orders, and quantity aggregation |
+| `LAG()` Window Function | Month-over-month comparison for all KPIs |
+| `COUNT(DISTINCT)` | Unique order volume per month |
+| Arithmetic on Window Results | Absolute difference calculation for volatility analysis |
+| `FORMAT()` Date Function | Monthly bucketing of transaction dates |
+
+### Analytical Methodology
+1. **Data Extraction** — Pulled all sales data from the `KAPS` table
+2. **Monthly Aggregation** — Grouped transactions into monthly buckets
+3. **Window Functions** — Applied `LAG()` to calculate MoM growth and decline
+4. **Absolute Differences** — Measured volatility and stability in performance
+5. **Business Interpretation** — Translated SQL outputs into actionable recommendations
+
+---
+
+##  Repository Structure
+```
+📂 Kap-s-Caf-SQL-Analytics-Project
+├── 📄 KapsCafe_Analysis.sql           — Full SQL scripts and queries
+├── 🖼️  CoverImage.jpg                  — Project cover image
+├── 🖼️  Query Screenshots (1-10).png    — SQL query result screenshots
+└── 📄 README.md                       — Project documentation
+```
+
+---
+
+##  Project Preview
+
+![Kap's Cafe SQL Analytics](Kap's%20Café%20–%20SQL%20Analytics%20Project.jpg)
+
+---
+
+##  About
+
+**Khurram Naveed** — Data Analyst specializing in SQL, Power BI, and business intelligence.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/khurramnaveed3233)
+[![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black?logo=github)](https://github.com/Khurramnaveed3233)
+[![Email](https://img.shields.io/badge/Email-Contact-red?logo=gmail)](mailto:khurramnaveed4545@gmail.com)
+
+---
+
+>  *This project demonstrates how pure SQL — without any visualization tools — can transform raw café transaction data into clear business intelligence, proving that a strong SQL foundation is the backbone of effective data analysis.*
